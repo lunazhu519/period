@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>月经调理手记</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3EEE1;
+    --paper-deep:#EAE2CC;
+    --ink:#2B2420;
+    --ink-soft:#5A5044;
+    --seal:#A83B2E;
+    --seal-soft:#C9694F;
+    --warm:#B9812E;
+    --warm-bg:#F2E4C6;
+    --cold:#3E6B85;
+    --cold-bg:#DCE8ED;
+    --neutral:#5D7052;
+    --neutral-bg:#E3E9D9;
+    --line:#C9BFA6;
+    --drawer:#E7DEC4;
+    --drawer-shadow:#B7AB8B;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(169,59,46,0.04), transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(93,112,82,0.05), transparent 45%);
+    color:var(--ink);
+    font-family:"Noto Sans SC", sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  ::selection{ background:var(--seal-soft); color:#fff; }
+
+  /* ---------- Header / spine ---------- */
+  .book{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 20px 80px;
+  }
+  header.cover{
+    display:flex;
+    align-items:stretch;
+    gap:18px;
+    padding:38px 0 28px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:28px;
+  }
+  .spine{
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    font-family:"Noto Serif SC", serif;
+    font-weight:900;
+    font-size:22px;
+    letter-spacing:6px;
+    background:var(--seal);
+    color:#F3EEE1;
+    padding:16px 10px;
+    border-radius:2px;
+    flex-shrink:0;
+    box-shadow:2px 2px 0 rgba(43,36,32,0.15);
+  }
+  .cover-text{flex:1;}
+  .cover-text .eyebrow{
+    font-size:12px;
+    letter-spacing:3px;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  h1{
+    font-family:"Noto Serif SC", serif;
+    font-weight:900;
+    font-size:clamp(28px,5vw,42px);
+    margin:0 0 10px;
+    line-height:1.2;
+  }
+  .cover-text p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:14.5px;
+    line-height:1.7;
+    max-width:52ch;
+  }
+
+  .disclaimer{
+    background:var(--warm-bg);
+    border:1px solid var(--warm);
+    border-radius:3px;
+    padding:12px 16px;
+    font-size:12.5px;
+    color:#6b4c14;
+    line-height:1.7;
+    margin-bottom:32px;
+  }
+  .disclaimer b{color:var(--seal);}
+
+  /* ---------- Tabs ---------- */
+  nav.tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:30px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:0;
+  }
+  nav.tabs button{
+    font-family:"Noto Serif SC", serif;
+    font-size:14.5px;
+    font-weight:600;
+    background:none;
+    border:none;
+    color:var(--ink-soft);
+    padding:10px 16px;
+    cursor:pointer;
+    position:relative;
+    letter-spacing:1px;
+  }
+  nav.tabs button.active{ color:var(--seal); }
+  nav.tabs button.active::after{
+    content:"";
+    position:absolute;
+    left:12px; right:12px; bottom:-1px;
+    height:2px;
+    background:var(--seal);
+  }
+  nav.tabs button:focus-visible{ outline:2px solid var(--seal); outline-offset:2px; }
+
+  section.panel{ display:none; animation:fade .35s ease; }
+  section.panel.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){ section.panel{animation:none;} }
+
+  h2.section-title{
+    font-family:"Noto Serif SC", serif;
+    font-size:22px;
+    font-weight:700;
+    margin:0 0 6px;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  h2.section-title .num{
+    font-size:12px;
+    color:var(--seal);
+    border:1px solid var(--seal);
+    border-radius:50%;
+    width:20px;height:20px;
+    display:inline-flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .section-sub{ color:var(--ink-soft); font-size:13.5px; margin:0 0 22px; line-height:1.7; }
+
+  /* ---------- 基础知识 ---------- */
+  .axis-card{
+    background:var(--paper-deep);
+    border-left:3px solid var(--seal);
+    padding:16px 20px;
+    border-radius:2px;
+    margin-bottom:16px;
+    line-height:1.8;
+    font-size:14px;
+  }
+  .axis-card b{ color:var(--seal); font-family:"Noto Serif SC",serif; }
+
+  .frame-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px,1fr));
+    gap:12px;
+    margin-top:18px;
+  }
+  .frame-item{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:14px 16px;
+  }
+  .frame-item .tag{
+    font-size:11px;
+    color:var(--seal);
+    letter-spacing:1px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .frame-item ul{ margin:6px 0 0; padding-left:16px; font-size:12.5px; color:var(--ink-soft); line-height:1.8;}
+
+  /* ---------- 证型对照表 ---------- */
+  .search-bar{
+    display:flex; gap:8px; margin-bottom:18px;
+  }
+  .search-bar input{
+    flex:1;
+    font-family:"Noto Sans SC",sans-serif;
+    font-size:14px;
+    padding:10px 14px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:#fff;
+    color:var(--ink);
+  }
+  .search-bar input:focus{ outline:2px solid var(--seal-soft); border-color:var(--seal); }
+
+  .syn-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:16px 18px;
+    margin-bottom:12px;
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:14px;
+  }
+  @media (max-width:600px){ .syn-card{ grid-template-columns:1fr; } }
+  .syn-name{
+    font-family:"Noto Serif SC",serif;
+    font-weight:700;
+    font-size:16px;
+  }
+  .nature-pill{
+    display:inline-block;
+    font-size:10.5px;
+    padding:2px 8px;
+    border-radius:10px;
+    margin-top:6px;
+    font-weight:600;
+  }
+  .pill-warm{ background:var(--warm-bg); color:var(--warm); }
+  .pill-cold{ background:var(--cold-bg); color:var(--cold); }
+  .pill-neutral{ background:var(--neutral-bg); color:var(--neutral); }
+
+  .syn-detail p{ margin:0 0 6px; font-size:13px; line-height:1.7; }
+  .syn-detail .label{ color:var(--ink-soft); font-size:11.5px; margin-right:4px;}
+  .syn-detail .drink{
+    margin-top:8px;
+    padding-top:8px;
+    border-top:1px dashed var(--line);
+    font-size:13px;
+  }
+  .syn-detail .drink b{ color:var(--seal); }
+  .no-result{ color:var(--ink-soft); font-size:13px; padding:20px 0; text-align:center; }
+
+  .classify-note{
+    margin-top:26px;
+    background:var(--neutral-bg);
+    border-radius:4px;
+    padding:16px 20px;
+    font-size:12.5px;
+    line-height:1.8;
+    color:#3d4a35;
+  }
+  .classify-note b{ font-family:"Noto Serif SC",serif; }
+
+  /* ---------- 药柜 / 食材 ---------- */
+  .cabinet{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+    gap:14px;
+  }
+  .drawer{
+    background:var(--drawer);
+    border:1px solid var(--drawer-shadow);
+    border-radius:3px 3px 6px 6px;
+    box-shadow:0 3px 0 var(--drawer-shadow);
+    padding:0;
+    cursor:pointer;
+    overflow:hidden;
+    transition:transform .15s ease;
+  }
+  .drawer:hover, .drawer:focus-within{ transform:translateY(2px); }
+  .drawer-label{
+    padding:14px 12px 10px;
+    text-align:center;
+  }
+  .drawer-label .name{
+    font-family:"Noto Serif SC",serif;
+    font-weight:700;
+    font-size:17px;
+  }
+  .drawer-label .nature{
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+  .drawer-handle{
+    height:6px;
+    background:var(--drawer-shadow);
+    margin:0 30%;
+    border-radius:0 0 4px 4px;
+  }
+  .drawer-detail{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    background:#fff;
+  }
+  .drawer.open .drawer-detail{ max-height:220px; }
+  .drawer-detail-inner{
+    padding:12px 14px 16px;
+    font-size:12.5px;
+    line-height:1.8;
+    color:var(--ink-soft);
+  }
+  .drawer-detail-inner .cap{ color:var(--seal); font-weight:600; }
+
+  /* ---------- 搭配原则 ---------- */
+  .principle-block{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:18px 20px;
+    margin-bottom:16px;
+  }
+  .principle-block h3{
+    font-family:"Noto Serif SC",serif;
+    font-size:15.5px;
+    margin:0 0 8px;
+    color:var(--seal);
+  }
+  .principle-block p{ font-size:13.5px; line-height:1.8; margin:0 0 8px; color:var(--ink);}
+  .timeline{
+    display:flex;
+    gap:0;
+    margin-top:14px;
+    border-radius:4px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .timeline .stage{
+    flex:1;
+    padding:12px 14px;
+    font-size:12px;
+    line-height:1.7;
+  }
+  .timeline .stage:nth-child(1){ background:var(--cold-bg); color:#274a5e; }
+  .timeline .stage:nth-child(2){ background:var(--neutral-bg); color:#3d4a35; }
+  .timeline .stage b{ display:block; font-family:"Noto Serif SC",serif; font-size:13px; margin-bottom:4px;}
+
+  /* ---------- 我的笔记 ---------- */
+  .note-form{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:16px;
+    margin-bottom:20px;
+  }
+  .note-form textarea{
+    width:100%;
+    min-height:80px;
+    font-family:"Noto Sans SC",sans-serif;
+    font-size:13.5px;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    resize:vertical;
+    color:var(--ink);
+  }
+  .note-form textarea:focus{ outline:2px solid var(--seal-soft); border-color:var(--seal); }
+  .note-form button{
+    margin-top:10px;
+    background:var(--seal);
+    color:#fff;
+    border:none;
+    padding:9px 18px;
+    border-radius:3px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    font-family:"Noto Sans SC",sans-serif;
+  }
+  .note-form button:hover{ background:var(--seal-soft); }
+  .note-form button:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+
+  .note-item{
+    background:var(--paper-deep);
+    border-left:3px solid var(--neutral);
+    padding:12px 16px;
+    border-radius:2px;
+    margin-bottom:10px;
+    font-size:13.5px;
+    line-height:1.75;
+    position:relative;
+  }
+  .note-item .date{
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-bottom:4px;
+    display:block;
+  }
+  .note-item .del{
+    position:absolute;
+    top:10px; right:12px;
+    background:none;border:none;
+    color:var(--ink-soft);
+    cursor:pointer;
+    font-size:12px;
+  }
+  .note-item .del:hover{ color:var(--seal); }
+  .note-empty{ color:var(--ink-soft); font-size:13px; text-align:center; padding:24px 0; }
+
+  .example-log{
+    background:#fff;
+    border:1px dashed var(--seal-soft);
+    border-radius:4px;
+    padding:14px 16px;
+    margin-bottom:22px;
+    font-size:13px;
+    line-height:1.8;
+  }
+  .example-log .eyebrow{ color:var(--seal); font-size:11px; letter-spacing:1px; margin-bottom:6px; font-weight:600;}
+
+  footer{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:11.5px;
+    margin-top:50px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+  <header class="cover">
+    <div class="spine">月經調理手記</div>
+    <div class="cover-text">
+      <div class="eyebrow">私人中医科普笔记 · 持续补充</div>
+      <h1>月经调理手记</h1>
+      <p>整理关于月经的中医基础认识、常见证型对照、食材性味与搭配原则,方便日后随时查阅。遇到新问题可以在「我的笔记」里继续记录。</p>
+    </div>
+  </header>
+
+  <div class="disclaimer">
+    <b>说明:</b>本页内容为中医科普整理,仅帮助理解基本逻辑与思路,<b>不能替代专业中医师面诊、把脉、辨证</b>。食疗茶饮相对温和,具体中药方剂请勿自行对号入座使用。如有异常出血、剧烈疼痛或周期持续紊乱,请及时就医。
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="basics" role="tab">基础知识</button>
+    <button class="tab-btn" data-tab="syndromes" role="tab">证型对照</button>
+    <button class="tab-btn" data-tab="cabinet" role="tab">食材药柜</button>
+    <button class="tab-btn" data-tab="principle" role="tab">搭配原则</button>
+    <button class="tab-btn" data-tab="notes" role="tab">我的笔记</button>
+  </nav>
+
+  <!-- ============ 基础知识 ============ -->
+  <section class="panel active" id="basics">
+    <h2 class="section-title"><span class="num">1</span>月经的中医基本认识</h2>
+    <p class="section-sub">中医称月经为"月事""癸水",其产生与"肾—天癸—冲任—胞宫"这条轴密切相关。</p>
+
+    <div class="axis-card"><b>肾为先天之本</b> — 肾藏精、主生殖,肾气充盛才能产生"天癸"(促进生殖功能成熟的物质)。</div>
+    <div class="axis-card"><b>冲任二脉</b> — 冲脉为"血海",任脉主胞胎,冲任气血充盈才能"月事以时下"。</div>
+    <div class="axis-card"><b>脾胃为后天之本</b> — 脾统血,气血生化之源在脾胃,脾胃虚弱则气血不足。</div>
+    <div class="axis-card"><b>肝主疏泄、藏血</b> — 肝气条达,血海才能按时满溢;情绪波动最容易影响月经。</div>
+
+    <div class="frame-grid">
+      <div class="frame-item">
+        <div class="tag">按周期异常</div>
+        <ul><li>月经先期(提前)</li><li>月经后期(推后)</li><li>先后不定期</li></ul>
+      </div>
+      <div class="frame-item">
+        <div class="tag">按经量异常</div>
+        <ul><li>月经过多</li><li>月经过少</li><li>闭经</li></ul>
+      </div>
+      <div class="frame-item">
+        <div class="tag">按经期异常</div>
+        <ul><li>经期延长 / 淋漓不尽</li><li>崩漏</li></ul>
+      </div>
+      <div class="frame-item">
+        <div class="tag">按伴随症状</div>
+        <ul><li>痛经 / 经行乳房胀痛</li><li>经行泄泻 / 浮肿</li><li>经行情志异常</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 证型对照 ============ -->
+  <section class="panel" id="syndromes">
+    <h2 class="section-title"><span class="num">2</span>常见证型对照表</h2>
+    <p class="section-sub">证型常常混合出现,不是非此即彼。可以搜索症状关键词快速查找方向。</p>
+
+    <div class="search-bar">
+      <input type="text" id="synSearch" placeholder="搜索症状关键词,例如:坠胀 / 血块 / 乏力 / 烦躁…">
+    </div>
+
+    <div id="synList"></div>
+
+    <div class="classify-note">
+      <b>证素组合逻辑:</b>以上9种是最核心的基本"证素"(寒、湿、热、气滞、气虚、血虚、血瘀、肾虚、肝郁),专业辨证往往是这些要素的交叉组合(如"气虚血瘀""脾肾阳虚"),而不是死记硬背几十种独立证型。
+    </div>
+  </section>
+
+  <!-- ============ 食材药柜 ============ -->
+  <section class="panel" id="cabinet">
+    <h2 class="section-title"><span class="num">3</span>常用食材性味功效</h2>
+    <p class="section-sub">点击抽屉查看详细功效与注意事项。<span style="color:var(--warm)">●温</span> <span style="color:var(--cold)">●寒/凉</span> <span style="color:var(--neutral)">●平</span></p>
+
+    <div class="cabinet" id="cabinetGrid"></div>
+  </section>
+
+  <!-- ============ 搭配原则 ============ -->
+  <section class="panel" id="principle">
+    <h2 class="section-title"><span class="num">4</span>搭配与时机原则</h2>
+
+    <div class="principle-block">
+      <h3>先通后补,以通为主</h3>
+      <p>生姜、红糖偏"散寒通瘀";红枣、枸杞、桂圆偏"补气养血"。若寒湿或血瘀邪气还未祛除干净就急着"补",容易出现<b>"闭门留寇"</b>——好比家里进了小偷却先把门锁上,反而让邪气更难排出,加重坠胀、血块等问题。</p>
+      <div class="timeline">
+        <div class="stage"><b>寒湿症状明显时(如经期)</b>生姜红糖水为主,先把寒湿散开、血块排顺畅。</div>
+        <div class="stage"><b>症状缓解 / 经期结束后</b>可加红枣、枸杞,变成"通补兼顾",补回经期消耗的气血。</div>
+      </div>
+    </div>
+
+    <div class="principle-block">
+      <h3>桂圆的特殊之处</h3>
+      <p>桂圆补力更强、性质更温热,还兼安神,适合<b>血虚兼失眠心悸</b>的人日常保健。但经量多、有热象(舌尖红、易长痘)或寒湿症状明显时,不建议现在放,以免助热或"闭门留寇"。</p>
+    </div>
+
+    <div class="principle-block">
+      <h3>关于牛奶 + 姜糖水</h3>
+      <p>牛奶性微寒,与生姜红糖(温)性质相反,理论上会互相牵制、削弱散寒效果;同时姜糖遇牛奶蛋白质容易结块,肠胃敏感或本身腹胀时更容易不适。建议<b>经期寒湿症状明显时分开饮用</b>,或换成热牛奶配红枣、温豆浆。</p>
+    </div>
+
+    <div class="principle-block">
+      <h3>经期通用原则</h3>
+      <p>不论证型,经期都应<b>避免生冷冰饮</b>——经期气血下行、胞宫相对空虚,生冷容易加重不适,这一点没有"热证可以吃冰"的例外。</p>
+    </div>
+  </section>
+
+  <!-- ============ 我的笔记 ============ -->
+  <section class="panel" id="notes">
+    <h2 class="section-title"><span class="num">5</span>我的笔记 / 疑问记录</h2>
+    <p class="section-sub">记录本次或以后的具体情况,方便回顾对照。</p>
+
+    <div class="example-log">
+      <div class="eyebrow">示例记录 · 8月18日</div>
+      经前一天游泳 + 吃冰西瓜 → 经期提前2天,小腹坠胀、大便排不尽(以往只是单纯痛感,睡一觉就好);经量不少、血块增多;舌质粉红、舌苔薄白不厚、舌尖不红、少量草莓点。<br>
+      <b>初步方向:</b>寒湿凝滞为主,夹杂轻微局部热象 — 建议先饮红糖生姜水/艾叶煮蛋,避免生冷及寒凉糖水,经期结束后再考虑红枣枸杞善后。
+    </div>
+
+    <div class="note-form">
+      <textarea id="noteInput" placeholder="记录新的情况或疑问…"></textarea><br>
+      <button id="noteSave">保存记录</button>
+    </div>
+
+    <div id="noteList"></div>
+  </section>
+
+  <footer>整理自与 Claude 的对话 · 仅供中医科普了解,不作为诊断或用药依据</footer>
+</div>
+
+<script>
+// ---------------- Tab switching ----------------
+const tabBtns = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.panel');
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ---------------- 证型数据 ----------------
+const syndromes = [
+  {name:"寒湿凝滞", nature:"warm", natureLabel:"温散", symptoms:"小腹坠胀、冷痛喜暖、大便黏滞或排不尽、经前有受寒史", blood:"经色暗、血块多、质稀夹杂黏液", drink:"红糖生姜水、艾叶煮蛋"},
+  {name:"寒凝血瘀(血寒)", nature:"warm", natureLabel:"温散", symptoms:"小腹冷痛拒按、得热痛减", blood:"经色暗紫、血块多、质稠", drink:"红糖姜茶、桂圆红糖水"},
+  {name:"气滞血瘀", nature:"warm", natureLabel:"温理气", symptoms:"经前乳房胀痛、烦躁易怒、小腹胀痛拒按", blood:"经色紫暗、血块多、排出后痛减", drink:"玫瑰花茶、陈皮山楂茶"},
+  {name:"血热妄行", nature:"cold", natureLabel:"寒凉", symptoms:"心烦口渴、面红、经量多来势急、经前皮肤易长痘", blood:"经色深红或紫红、质稠、无血块或少", drink:"菊花茶、绿豆汤(不加冰)"},
+  {name:"气虚不摄", nature:"warm", natureLabel:"温补", symptoms:"神疲乏力、气短懒言、小腹空坠感(下坠为主,非胀)", blood:"经色淡、质稀、量或多或少", drink:"红枣桂圆水、黄芪红枣茶"},
+  {name:"血虚", nature:"neutral", natureLabel:"平补", symptoms:"头晕眼花、面色苍白或萎黄、经后疲惫明显", blood:"经色淡、量少、周期易延后", drink:"红枣枸杞水、当归炖蛋/炖鸡汤"},
+  {name:"肾虚(精血不足)", nature:"neutral", natureLabel:"平补", symptoms:"腰膝酸软、耳鸣、经量少、周期紊乱", blood:"经色淡暗、质稀", drink:"黑豆核桃豆浆、枸杞黑芝麻糊"},
+  {name:"肝郁气滞", nature:"neutral", natureLabel:"平理气", symptoms:"经前情绪波动大、乳房胀痛明显、叹气多", blood:"经色暗、周期紊乱不固定", drink:"玫瑰花茶、佛手茶"},
+  {name:"痰湿阻滞", nature:"neutral", natureLabel:"平祛湿", symptoms:"体型偏胖、经量少或闭经倾向、白带多、舌苔厚腻", blood:"经色淡、质黏腻", drink:"陈皮薏米水、赤小豆薏米水"},
+];
+
+const pillClass = { warm:"pill-warm", cold:"pill-cold", neutral:"pill-neutral" };
+
+function renderSyndromes(filter=""){
+  const list = document.getElementById('synList');
+  const f = filter.trim().toLowerCase();
+  const filtered = syndromes.filter(s=>{
+    const hay = (s.name+s.symptoms+s.blood+s.drink).toLowerCase();
+    return hay.includes(f);
+  });
+  if(filtered.length===0){
+    list.innerHTML = '<div class="no-result">没有找到匹配的证型,换个关键词试试</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(s=>`
+    <div class="syn-card">
+      <div>
+        <div class="syn-name">${s.name}</div>
+        <div class="nature-pill ${pillClass[s.nature]}">${s.natureLabel}</div>
+      </div>
+      <div class="syn-detail">
+        <p><span class="label">症状</span>${s.symptoms}</p>
+        <p><span class="label">经色经质</span>${s.blood}</p>
+        <div class="drink"><b>常见食疗/茶饮:</b> ${s.drink}</div>
+      </div>
+    </div>
+  `).join('');
+}
+renderSyndromes();
+document.getElementById('synSearch').addEventListener('input', e=>renderSyndromes(e.target.value));
+
+// ---------------- 食材药柜 ----------------
+const herbs = [
+  {name:"生姜", nature:"warm", label:"辛·温", desc:"散寒、温中。重点在\"散\"——把寒邪往外发散驱散,是散寒通瘀组合的主力。"},
+  {name:"红糖", nature:"warm", label:"甘·温", desc:"活血、散寒、缓急止痛。重点在\"通\"——活血化瘀通经,常与生姜搭配。"},
+  {name:"红枣", nature:"warm", label:"甘·温", desc:"补中益气、养血。力道柔和平和,适合经后善后调理。"},
+  {name:"枸杞", nature:"neutral", label:"甘·平偏温", desc:"滋补肝肾、养血,偏\"滋阴\",常与红枣搭配做日常保健茶饮。"},
+  {name:"桂圆", nature:"warm", label:"甘·温", desc:"补心脾、益气血、安神,力道比红枣更足更温热。适合血虚兼失眠心悸;经量多或有热象时不宜。"},
+  {name:"牛奶", nature:"cold", label:"甘·微寒", desc:"补虚损、润肺胃、生津润燥。与姜糖性质相反,且遇姜糖易结块,经期寒湿明显时建议分开饮用。"},
+  {name:"黄芪", nature:"warm", label:"甘·微温", desc:"补气升阳、固表止汗、利水消肿。偏重\"补气\",常与红枣搭配(黄芪红枣茶),针对气虚乏力、气短懒言、小腹空坠感效果较对症;有明显热象或外感未清时不宜多用。"},
+  {name:"红茶", nature:"warm", label:"甘·温", desc:"经过发酵,性质偏温,能暖胃、助消化,比绿茶更适合体寒的人。但含咖啡因,经期饮用不宜过浓过多,以免影响睡眠,也有说法认为大量饮用可能影响铁吸收。"},
+  {name:"红玫瑰(玫瑰花)", nature:"warm", label:"甘微苦·温", desc:"疏肝解郁、理气活血、调经止痛。重点在\"理气\"——适合经前情绪波动、乳房胀痛、气滞血瘀或肝郁气滞的情况,常泡玫瑰花茶饮用,性质温和,大部分人可以日常饮用。"},
+];
+
+function renderCabinet(){
+  const grid = document.getElementById('cabinetGrid');
+  grid.innerHTML = herbs.map((h,i)=>`
+    <div class="drawer" id="drawer-${i}" tabindex="0">
+      <div class="drawer-label" data-idx="${i}">
+        <div class="name">${h.name}</div>
+        <div class="nature" style="color:${h.nature==='warm'?'var(--warm)':h.nature==='cold'?'var(--cold)':'var(--neutral)'}">${h.label}</div>
+      </div>
+      <div class="drawer-handle"></div>
+      <div class="drawer-detail"><div class="drawer-detail-inner"><span class="cap">功效 — </span>${h.desc}</div></div>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.drawer').forEach(d=>{
+    const toggle = ()=> d.classList.toggle('open');
+    d.addEventListener('click', toggle);
+    d.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+  });
+}
+renderCabinet();
+
+// ---------------- 我的笔记(持久化) ----------------
+let notesMemory = []; // in-memory fallback
+const STORAGE_KEY = 'menstrual-notes';
+
+async function loadNotes(){
+  try{
+    const result = await window.storage.get(STORAGE_KEY, false);
+    return result && result.value ? JSON.parse(result.value) : [];
+  }catch(err){
+    return notesMemory;
+  }
+}
+async function saveNotes(notes){
+  notesMemory = notes;
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(notes), false);
+  }catch(err){
+    // storage unavailable — keep in-memory only for this session
+  }
+}
+
+function fmtDate(d){
+  const dt = new Date(d);
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')} ${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')}`;
+}
+
+async function renderNotes(){
+  const notes = await loadNotes();
+  const list = document.getElementById('noteList');
+  if(!notes.length){
+    list.innerHTML = '<div class="note-empty">还没有记录,写下第一条笔记吧</div>';
+    return;
+  }
+  list.innerHTML = notes.slice().reverse().map((n)=>`
+    <div class="note-item">
+      <button class="del" data-id="${n.id}" aria-label="删除这条记录">删除</button>
+      <span class="date">${fmtDate(n.ts)}</span>
+      ${n.text.replace(/</g,'&lt;')}
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.del').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const id = btn.dataset.id;
+      const current = await loadNotes();
+      const updated = current.filter(n=>String(n.id)!==id);
+      await saveNotes(updated);
+      renderNotes();
+    });
+  });
+}
+renderNotes();
+
+document.getElementById('noteSave').addEventListener('click', async ()=>{
+  const input = document.getElementById('noteInput');
+  const text = input.value.trim();
+  if(!text) return;
+  const current = await loadNotes();
+  current.push({ id: Date.now(), ts: Date.now(), text });
+  await saveNotes(current);
+  input.value = '';
+  renderNotes();
+});
+</script>
+</body>
+</html>
